@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-test:
     runs-on: ubuntu-latest
@@ -24,5 +28,11 @@ jobs:
       - name: Skip test
         run: echo "Testing dilewati karena project belum memiliki script test"
 
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ziyauny
+
       - name: Build Docker image
-        run: docker build -t belajar-cicd:1.0 .
+        run: docker build -t ghcr.io/ziyauny/belajar-cicd-ubuntu:latest .
+
+      - name: Push Docker image
+        run: docker push ghcr.io/ziyauny/belajar-cicd-ubuntu:latest
