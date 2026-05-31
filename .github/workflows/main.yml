@@ -29,7 +29,11 @@ jobs:
         run: echo "Testing dilewati karena project belum memiliki script test"
 
       - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ziyauny
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ziyauny
+          password:  "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Build Docker image
         run: docker build -t ghcr.io/ziyauny/belajar-cicd-ubuntu:latest .
