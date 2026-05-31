@@ -1,0 +1,5 @@
+{
+  "name": "belajar-cicd",
+  "script": "./bin/www",
+  "instances": "1"
+}
